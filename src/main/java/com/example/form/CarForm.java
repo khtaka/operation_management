@@ -7,12 +7,15 @@ public class CarForm {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getPassengers() {
 		return passengers;
 	}
+
 	public void setPassengers(Integer passengers) {
 		this.passengers = passengers;
 	}

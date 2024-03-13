@@ -24,43 +24,41 @@ public class CarController {
 		this.carService = carService;
 	}
 
-
 	@GetMapping("/list")
 	public String index(Model model, @ModelAttribute CarForm carForm,
-	             @RequestParam(value = "carId", required = false) Integer id,
-	             @RequestParam(value = "carName", required = false) String name,
-	             @RequestParam(value = "carPassengers", required = false) Integer passengers) {
-	    List<Car> cars = this.carService.findAll(id, name, passengers);
-	    model.addAttribute("cars", cars);
-	    return "index";
+			@RequestParam(value = "carId", required = false) Integer id,
+			@RequestParam(value = "carName", required = false) String name,
+			@RequestParam(value = "carPassengers", required = false) Integer passengers) {
+		List<Car> cars = this.carService.findAll(id, name, passengers);
+		model.addAttribute("cars", cars);
+		return "index";
 	}
 
-	
 	@PostMapping("/create")
 	public String create(@ModelAttribute CarForm carForm) {
-	    this.carService.insert(carForm.getName(), carForm.getPassengers());
-	    return "redirect:/index";
+		this.carService.insert(carForm.getName(), carForm.getPassengers());
+		return "redirect:/index";
 	}
-	
+
 	@GetMapping("/edit/{id}")
 	public String showEdit(@PathVariable("id") Integer id, Model model, @ModelAttribute CarForm carForm) {
-	    Car car = this.carService.findById(id);
-	    carForm.setName(car.getName());
-	    carForm.setPassengers(car.getPassengers());
-	    model.addAttribute("id", id);
-	    return "edit";
+		Car car = this.carService.findById(id);
+		carForm.setName(car.getName());
+		carForm.setPassengers(car.getPassengers());
+		model.addAttribute("id", id);
+		return "edit";
 	}
-	
+
 	@PostMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, @ModelAttribute CarForm carForm) {
-	    this.carService.update(id, carForm.getName(), carForm.getPassengers());
-	    return "redirect:/index";
+		this.carService.update(id, carForm.getName(), carForm.getPassengers());
+		return "redirect:/index";
 	}
-	
+
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
-	    this.carService.deleteById(id);
-	    return "redirect:/index";
+		this.carService.deleteById(id);
+		return "redirect:/index";
 	}
 
 }
